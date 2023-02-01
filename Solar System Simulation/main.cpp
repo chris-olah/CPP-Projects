@@ -11,8 +11,7 @@
 #include "CelestialBody.h"
 using namespace std;
 
-int main(int argc, char* argv[])
-{   
+int main(int argc, char* argv[]) {   
     sf::RenderWindow window(sf::VideoMode(512,512),"Celestial Bodies");
     Universe universe;
 
@@ -28,8 +27,7 @@ int main(int argc, char* argv[])
 
     vector <CelestialBody> trial;
 
-    for(int i = 0; i < numofPlanets; i++) //get planets
-    {
+    for(int i = 0; i < numofPlanets; i++) {
         shared_ptr<CelestialBody>planet(new CelestialBody);
         cin >> *planet;
         planet->radius(radiusofUni);
@@ -39,8 +37,7 @@ int main(int argc, char* argv[])
     } 
     
     sf::Music music;//play background music
-    if(!music.openFromFile("2001.wav"))
-    {
+    if(!music.openFromFile("2001.wav")) {
         return -1;
     }
     music.play();
@@ -64,14 +61,11 @@ int main(int argc, char* argv[])
     vector<CelestialBody>::iterator x, y;
 
 
-    while(window.isOpen())
-    {
+    while(window.isOpen()) {
         sf:: Event event;
-        while(window.pollEvent(event))
-        {
-            if(event.type == sf::Event::Closed)
-            {
-            window.close();
+        while(window.pollEvent(event)) {
+            if(event.type == sf::Event::Closed) {
+            	window.close();
             }
         }
 
@@ -81,35 +75,30 @@ int main(int argc, char* argv[])
         text.setString("Time: " + to_string(simulation));
         window.draw(text);
 
-    double fx, fy;
-    x = trial.begin();
+    	double fx, fy;
+    	x = trial.begin();
     
-    for(int i = 0; i < numofPlanets; i++)
-    {
-      y = trial.begin();
-      fx = 0;
-      fy = 0;
-
-      for(int j = 0; j < numofPlanets; j++)
-	    {
-	        if(i != j)
-	        {
-	            fx += universe.calc_force_x(*x,*y);
-	            fy += universe.calc_force_y(*x,*y);
-	        }
-	        y++;
-	    }
+    	for(int i = 0; i < numofPlanets; i++) {
+      	    y = trial.begin();
+      	    fx = 0;
+      	    fy = 0;
+		for(int j = 0; j < numofPlanets; j++) {
+	            if(i != j) {
+	                fx += universe.calc_force_x(*x,*y);
+	                fy += universe.calc_force_y(*x,*y);
+	            }
+	            y++;
+	    	}
       
-      x->forces(fx,fy);
-      x++;
-    }
+      	    x->forces(fx,fy);
+      	    x++;
+    	}
 
-    for(it = trial.begin(); it != trial.end(); it++)
-      {
-    	window.draw(*it);
+    	for(it = trial.begin(); it != trial.end(); it++) {
+    	    window.draw(*it);
 	    it->step(step_time);
 	    it->position();
-      }
+         }
    
     window.display();
     simulation++;
