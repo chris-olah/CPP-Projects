@@ -78,18 +78,15 @@ class CelestialBody:public sf::Drawable
     
 };
 
-class Universe
-{
+class Universe {
     public:
-    vector<shared_ptr<CelestialBody> >body;
-    
-    double calc_force_x (CelestialBody &first, CelestialBody &second);
-    double calc_force_y (CelestialBody &first, CelestialBody &second);
+        vector<shared_ptr<CelestialBody> >body;
+        double calc_force_x (CelestialBody &first, CelestialBody &second);
+        double calc_force_y (CelestialBody &first, CelestialBody &second);
     
     private:
-    double seconds;
-    double net_force;
-
+        double seconds;
+        double net_force;
 };
 
 #endif
