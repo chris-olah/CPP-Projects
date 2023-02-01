@@ -29,9 +29,9 @@ const int width = 512;
 
 class CelestialBody:public sf::Drawable {
     public:
-        CelestialBody();//default
+        CelestialBody(); // Default
         CelestialBody(double xposition, double yposition, double xvelocity, double yvelocity, double mass, string filename); // Constructor
-        friend istream& operator>> (istream &input, CelestialBody &b);//overloaded
+        friend istream& operator>> (istream &input, CelestialBody &b); //Overloaded
         void radius (float radius);
         void position();
 
