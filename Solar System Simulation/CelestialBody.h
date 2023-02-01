@@ -27,55 +27,46 @@ using namespace std;
 const int height = 512;
 const int width = 512;
 
-class CelestialBody:public sf::Drawable
-{
+class CelestialBody:public sf::Drawable {
     public:
+        CelestialBody();//default
+        CelestialBody(double xposition, double yposition, double xvelocity, double yvelocity, double mass, string filename); // Constructor
+        friend istream& operator>> (istream &input, CelestialBody &b);//overloaded
+        void radius (float radius);
+        void position();
 
-    CelestialBody();//default
-    CelestialBody(double xposition, double yposition, double xvelocity, double yvelocity, double mass, string filename); // Constructor
-    friend istream& operator>> (istream &input, CelestialBody &b);//overloaded
-    void radius (float radius);
-    void position();
+        void forces (double xForce, double yForce);//used
+        void step (double time);
 
-    void forces (double xForce, double yForce);//used
-    void step (double time);
+        double get_mass() {
+            return _mass;
+        }
 
-    double get_mass()
-    {
-        return _mass;
-    }
+        double get_x() {
+            return _xposition;
+        }
 
-    double get_x()
-    {
-        return _xposition;
-    }
-
-    double get_y()
-    {
-        return _yposition;
-    }
+        double get_y() {
+            return _yposition;
+        }
 
     private:
+        void virtual draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        double _xposition, _yposition;
+        double _xvelocity, _yvelocity;
+        double _mass;
+        double _radius;
+        string _filename;
 
-    void virtual draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    
-    double _xposition, _yposition;
-    double _xvelocity, _yvelocity;
-    double _mass;
-    double _radius;
-    string _filename;
+        double acceleration_x;
+        double acceleration_y;
 
+        double force_x;
+        double force_y;
 
-    double acceleration_x;
-    double acceleration_y;
-
-    double force_x;
-    double force_y;
-
-    sf::Image image;
-    sf::Sprite sprite;
-    sf::Texture texture;
-    
+        sf::Image image;
+        sf::Sprite sprite;
+        sf::Texture texture;
 };
 
 class Universe {
