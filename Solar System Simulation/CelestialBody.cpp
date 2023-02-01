@@ -1,12 +1,10 @@
 #include "CelestialBody.h"
 
-CelestialBody::CelestialBody()
-{
+CelestialBody::CelestialBody() {
   return;
 }
 
-CelestialBody::CelestialBody(double xposition, double yposition, double xvelocity, double yvelocity, double mass,string filename)
-{
+CelestialBody::CelestialBody(double xposition, double yposition, double xvelocity, double yvelocity, double mass,string filename) {
   _xposition = xposition;
   _yposition = yposition;
   _xvelocity = xvelocity;
@@ -18,8 +16,7 @@ CelestialBody::CelestialBody(double xposition, double yposition, double xvelocit
   sprite.setPosition(sf::Vector2f(_xposition, _yposition));
 }
 
-istream& operator>> (istream &input, CelestialBody &b)
-{
+istream& operator>> (istream &input, CelestialBody &b) {
   input >> b._xposition >> b._yposition;
   input >> b._yvelocity >> b._yvelocity;
   input >> b._mass >> b._filename;
